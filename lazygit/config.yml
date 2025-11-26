@@ -1,0 +1,46 @@
+
+gui:
+  # Use the Kanagawa Dragon theme
+  theme:
+    # Active panel border (accent) – Kanagawa springBlue / brightBlue-ish
+    activeBorderColor:
+      - '#7FB4CA'   # springBlue / brightBlue
+      - bold
+
+    # Inactive panel border – soft gray
+    inactiveBorderColor:
+      - '#A6A69C'   # brightBlack from your terminal scheme
+
+    # Hint/options text (bottom help) – same accent as active border
+    optionsTextColor:
+      - '#7FB4CA'   # springBlue
+
+    # Current line background – use the same selection bg as your terminal
+    selectedLineBgColor:
+      - '#223249'   # waveBlue1 (selectionBackground)
+
+    # Diff range selection (when selecting hunks/lines)
+    selectedRangeBgColor:
+      - '#252535'   # winterBlue: subtle but distinct from selectedLine
+
+    # Cherry-picked commits background/foreground
+    cherryPickedCommitBgColor:
+      - '#252535'   # winterBlue
+    cherryPickedCommitFgColor:
+      - '#7E9CD8'   # crystalBlue
+
+    # Color for “unstaged changes” label
+    unstagedChangesColor:
+      - '#DCA561'   # autumnYellow (Git Change)
+
+    # Default foreground – matches your terminal foreground
+    defaultFgColor:
+      - '#C8C093'   # oldWhite
+
+    # Border color when searching (e.g. search panel active)
+    searchingActiveBorderColor:
+      - '#E6C384'   # carpYellow (nice warm highlight)
+
+  authorColors:
+    # Default author color – soft violet, similar vibe to your Catppuccin purple
+    '*': '#938AA9'  # springViolet1
