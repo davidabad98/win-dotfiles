@@ -4,7 +4,7 @@ return {
 	build = ":TSUpdate",
 	config = function()
 		require("nvim-treesitter.configs").setup({
-			auto_install = true,
+			auto_install = false,
 			--ensure_installed = { "lua", "vim", "vimdoc", "query", "javascript", "python",
 			--            "c_sharp", "razor", "html", "sql", "json", "markdown",
 			--            "markdown_inline" }, -- add languages you need

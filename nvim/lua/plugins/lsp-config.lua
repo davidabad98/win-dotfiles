@@ -4,7 +4,46 @@ return {
 	{
 		"williamboman/mason.nvim",
 		config = function()
-			require("mason").setup()
+			-- Standard Mason setup, but with the extra registry for roslyn/rzls
+			require("mason").setup({
+				registries = {
+					"github:mason-org/mason-registry",
+					"github:Crashdummyy/mason-registry",
+				},
+			})
+
+			-- Optional: auto-install tools
+			local mr_ok, mr = pcall(require, "mason-registry")
+			if not mr_ok then
+				return
+			end
+
+			local tools = {
+
+				-- LSP binaries:
+				"html-lsp",
+				"css-lsp",
+				"eslint-lsp",
+				"typescript-language-server",
+				"json-lsp",
+
+				-- formatters / tools:
+				"csharpier",
+				"prettier",
+				"stylua",
+				"xmlformatter",
+
+				-- C# / Razor binaries
+				"roslyn",
+				"rzls",
+			}
+
+			for _, tool in ipairs(tools) do
+				local ok, pkg = pcall(mr.get_package, tool)
+				if ok and not pkg:is_installed() then
+					pkg:install()
+				end
+			end
 		end,
 	},
 
@@ -13,7 +52,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			-- list servers you want installed / enabled
-			local servers = { "lua_ls" } --, "pyright" } --, "omnisharp"  }  -- add more as needed "omnisharp"
+			local servers = { "lua_ls", "pyright" }
 
 			-- install servers via mason
 			require("mason-lspconfig").setup({
@@ -28,18 +67,52 @@ return {
 				capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 			end
 
-			-- common on_attach for LSP keymaps (per-buffer)
+			-- === unified on_attach for ALL LSPs (C#, Python, Lua, etc.) ===
 			local on_attach = function(client, bufnr)
-				local bufopts = { noremap = true, silent = true, buffer = bufnr }
-				vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-				vim.keymap.set("n", "<leader>rr", vim.lsp.buf.references, bufopts)
-				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
-				-- format on save if supported
+				local map = function(mode, keys, func, desc)
+					if desc then
+						desc = "LSP: " .. desc
+					end
+					vim.keymap.set(mode, keys, func, {
+						buffer = bufnr,
+						noremap = true,
+						silent = true,
+						desc = desc,
+					})
+				end
+
+				-- Navigation
+				map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
+				map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
+				map("n", "gi", vim.lsp.buf.implementation, "Goto Implementation")
+				map("n", "gr", vim.lsp.buf.references, "Goto References")
+				map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+				map("n", "gk", vim.lsp.buf.signature_help, "Signature Help")
+
+				-- Refactor / workspace
+				map("n", "<leader>rn", vim.lsp.buf.rename, "Rename")
+				map("n", "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+				map("v", "<leader>ca", vim.lsp.buf.code_action, "Code Action (Range)")
+				map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
+				map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Workspace Remove Folder")
+				map("n", "<leader>wl", function()
+					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+				end, "Workspace List Folders")
+
+				-- Diagnostics
+				map("n", "[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
+				map("n", "]d", vim.diagnostic.goto_next, "Next Diagnostic")
+				map("n", "<leader>e", vim.diagnostic.open_float, "Line Diagnostics")
+				map("n", "<leader>Q", function()
+					vim.diagnostic.setqflist({ bufnr = 0, open = true })
+				end, "Buffer Diagnostics to Quickfix")
+
+				-- You can add language-specific tweaks here if needed:
+				-- if client.name == "roslyn" then ... end
+				-- if client.name == "pyright" then ... end
 			end
 
-			-- register & enable each server
+			-- register & enable each "classic" server
 			for _, name in ipairs(servers) do
 				-- try to load a per-server config file: lua/lsp/<name>.lua
 				local ok, server_opts = pcall(require, "lsp." .. name)
@@ -57,6 +130,30 @@ return {
 				-- enable the server (call pcall to avoid hard errors during changes)
 				pcall(vim.lsp.enable, name)
 			end
+
+			-- === Roslyn: use the SAME on_attach + capabilities ===
+			vim.lsp.config("roslyn", {
+				on_attach = on_attach,
+				capabilities = capabilities,
+				-- add Roslyn-specific settings here later if you want
+			})
+			-- NOTE: do NOT call vim.lsp.enable("roslyn"); roslyn.nvim handles that.
+
+			-- IMPORTANT: vim diagnostic configuration AFTER LSPs are loaded
+			vim.diagnostic.config({
+				underline = false,
+				virtual_text = false, -- disable inline text
+				update_in_insert = false,
+				severity_sort = true,
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = " ",
+						[vim.diagnostic.severity.WARN] = " ",
+						[vim.diagnostic.severity.HINT] = " ",
+						[vim.diagnostic.severity.INFO] = " ",
+					},
+				},
+			})
 		end,
 	},
 
@@ -69,10 +166,85 @@ return {
 		opts = {
 			-- LSP progress (this is what you want)
 			progress = {},
+
 			-- Notification subsystem (we keep it *not* overriding vim.notify)
 			notification = {
 				override_vim_notify = false, -- IMPORTANT: do NOT touch vim.notify
+				window = {
+					winblend = 0, -- 0 = opaque, 100 = fully transparent
+				},
 			},
 		},
+	},
+	{
+		"seblyng/roslyn.nvim",
+		---@module 'roslyn.config'
+		---@type RoslynNvimConfig
+		ft = { "cs", "razor" },
+		opts = {
+			-- your configuration comes here; leave empty for default settings
+		},
+
+		dependencies = {
+			{
+				-- By loading as a dependencies, we ensure that we are available to set
+				-- the handlers for Roslyn.
+				"tris203/rzls.nvim",
+				config = true,
+			},
+		},
+		lazy = false,
+		config = function()
+			-- Use one of the methods in the Integration section to compose the command.
+			local mason_registry = require("mason-registry")
+
+			local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
+			local cmd = {
+				"roslyn",
+				"--stdio",
+				"--logLevel=Information",
+				"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+				"--razorSourceGenerator=" .. vim.fs.joinpath(rzls_path, "Microsoft.CodeAnalysis.Razor.Compiler.dll"),
+				"--razorDesignTimePath="
+					.. vim.fs.joinpath(rzls_path, "Targets", "Microsoft.NET.Sdk.Razor.DesignTime.targets"),
+				"--extension",
+				vim.fs.joinpath(rzls_path, "RazorExtension", "Microsoft.VisualStudioCode.RazorExtension.dll"),
+			}
+
+			vim.lsp.config("roslyn", {
+				cmd = cmd,
+				handlers = require("rzls.roslyn_handlers"),
+				settings = {
+					["csharp|inlay_hints"] = {
+						csharp_enable_inlay_hints_for_implicit_object_creation = true,
+						csharp_enable_inlay_hints_for_implicit_variable_types = true,
+
+						csharp_enable_inlay_hints_for_lambda_parameter_types = true,
+						csharp_enable_inlay_hints_for_types = true,
+						dotnet_enable_inlay_hints_for_indexer_parameters = true,
+						dotnet_enable_inlay_hints_for_literal_parameters = true,
+						dotnet_enable_inlay_hints_for_object_creation_parameters = true,
+						dotnet_enable_inlay_hints_for_other_parameters = true,
+						dotnet_enable_inlay_hints_for_parameters = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_differ_only_by_suffix = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
+						dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
+					},
+					["csharp|code_lens"] = {
+						dotnet_enable_references_code_lens = true,
+					},
+				},
+			})
+			vim.lsp.enable("roslyn")
+		end,
+		init = function()
+			-- We add the Razor file types before the plugin loads.
+			vim.filetype.add({
+				extension = {
+					razor = "razor",
+					cshtml = "razor",
+				},
+			})
+		end,
 	},
 }

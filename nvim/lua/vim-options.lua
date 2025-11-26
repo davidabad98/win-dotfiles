@@ -33,32 +33,61 @@ vim.opt.colorcolumn = "88" -- Enable vertical ruler line
 
 -- ========== Keymaps ==========
 
--- Quick save & quit
-vim.keymap.set("n", "<leader>w", "<cmd>w<CR>")
-vim.keymap.set("n", "<leader>q", "<cmd>q<CR>")
-vim.keymap.set("n", "<leader>x", "<cmd>x<CR>")
+-- ========== Save & quit ==========
 
--- ========== Naviagtion ==========
+vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", {
+	desc = "Save current buffer",
+})
 
--- Switch b/w buffers
-vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>")
-vim.keymap.set("n", "<S-l>", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", {
+	desc = "Quit window",
+})
 
--- Splits
-vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>")
-vim.keymap.set("n", "<leader>s", "<cmd>split<CR>")
-vim.keymap.set("n", "<leader>n", "<cmd>vnew<CR>")
-vim.keymap.set("n", "<leader>t", "<cmd>tabnew<CR>")
+vim.keymap.set("n", "<leader>x", "<cmd>x<CR>", {
+	desc = "Save and quit",
+})
+
+-- ========== Navigation ==========
+
+-- Switch between buffers
+vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", {
+	desc = "Previous buffer",
+})
+vim.keymap.set("n", "<S-l>", "<cmd>bnext<CR>", {
+	desc = "Next buffer",
+})
+
+-- Splits & tabs
+vim.keymap.set("n", "<leader>v", "<cmd>vsplit<CR>", {
+	desc = "Vertical split",
+})
+vim.keymap.set("n", "<leader>s", "<cmd>split<CR>", {
+	desc = "Horizontal split",
+})
+vim.keymap.set("n", "<leader>n", "<cmd>vnew<CR>", {
+	desc = "New vertical empty buffer",
+})
+vim.keymap.set("n", "<leader>t", "<cmd>tabnew<CR>", {
+	desc = "New tab",
+})
 
 -- Window navigation with leader
-vim.keymap.set("n", "<leader>h", "<C-w>h")
-vim.keymap.set("n", "<leader>j", "<C-w>j")
-vim.keymap.set("n", "<leader>k", "<C-w>k")
-vim.keymap.set("n", "<leader>l", "<C-w>l")
+vim.keymap.set("n", "<leader>h", "<C-w>h", {
+	desc = "Focus left window",
+})
+vim.keymap.set("n", "<leader>j", "<C-w>j", {
+	desc = "Focus lower window",
+})
+vim.keymap.set("n", "<leader>k", "<C-w>k", {
+	desc = "Focus upper window",
+})
+vim.keymap.set("n", "<leader>l", "<C-w>l", {
+	desc = "Focus right window",
+})
 
 -- ========== Quickfix ==========
-vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>", { desc = "Quickfix Next" })
-vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>", { desc = "Quickfix Prev" })
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz", { desc = "Quickfix Next (centered)" })
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz", { desc = "Quickfix Prev (centered)" })
 
 -- helpers to toggle qf/loclist windows
 -- local function is_open(kind)
@@ -107,6 +136,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set("i", "<C-c>", "<Esc>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("i", "<C-h>", "<C-w>") -- CTRL+backspace
 
 -- Open the tmux sessionizer from inside Neovim
 -- NOTE: requires tmux; inside tmux it opens a popup, outside it spawns a new tmux session/window
@@ -139,6 +169,18 @@ vim.keymap.set("n", "<leader>cn", function()
 	print("Copied filename: " .. vim.fn.expand("%:t"))
 end, { noremap = true, silent = true })
 
+-- Copy path relative to current working directory
+vim.keymap.set("n", "<leader>cp", function()
+	vim.fn.setreg("+", vim.fn.expand("%"))
+	print("Copied path: " .. vim.fn.expand("%"))
+end, { noremap = true, silent = true })
+
+-- Copy absolute path
+vim.keymap.set("n", "<leader>cP", function()
+	vim.fn.setreg("+", vim.fn.expand("%:p"))
+	print("Copied absolute path: " .. vim.fn.expand("%:p"))
+end, { noremap = true, silent = true })
+
 -- Show hidden characters (good for debugging indentation)
 vim.opt.list = true
 vim.opt.listchars = { tab = "→ ", trail = "·", nbsp = "␣" }
@@ -165,17 +207,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 --   command = "set ff=unix",
 -- })
 
+vim.g.dotnet_errors_only = true
+vim.g.dotnet_show_project_file = false
+
 -- ========== Diagnostics ==========
 vim.o.updatetime = 50 -- 0.05 seconds idle time before CursorHold triggers
-
--- configure diagnostic display
-vim.diagnostic.config({
-	virtual_text = true, -- disable inline text
-	-- signs = true,
-	-- underline = true,
-	-- update_in_insert = false,
-	severity_sort = true,
-})
 
 -- toggle virtual_text on/off
 vim.keymap.set("n", "<leader>dt", function()
@@ -195,9 +231,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	end,
 })
 
-vim.keymap.set(
-	"n",
-	"<leader>Q",
-	vim.diagnostic.setloclist,
-	{ noremap = true, silent = true, desc = "Open Diagnostic [Q]uickfix list" }
-)
+-- Background color for DAP
+vim.api.nvim_set_hl(0, "DapStoppedLine", {
+	bg = "#52503b", -- pick a bg colour you like
+})
