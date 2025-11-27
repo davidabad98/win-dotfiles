@@ -9,13 +9,13 @@ gui:
 
     # Inactive panel border – soft gray
     inactiveBorderColor:
-      - '#A6A69C'   # brightBlack from your terminal scheme
+      - '#A6A69C'   # brightBlack from terminal scheme
 
     # Hint/options text (bottom help) – same accent as active border
     optionsTextColor:
       - '#7FB4CA'   # springBlue
 
-    # Current line background – use the same selection bg as your terminal
+    # Current line background – use the same selection bg as terminal
     selectedLineBgColor:
       - '#223249'   # waveBlue1 (selectionBackground)
 
@@ -33,7 +33,7 @@ gui:
     unstagedChangesColor:
       - '#DCA561'   # autumnYellow (Git Change)
 
-    # Default foreground – matches your terminal foreground
+    # Default foreground – matches terminal foreground
     defaultFgColor:
       - '#C8C093'   # oldWhite
 
@@ -42,5 +42,5 @@ gui:
       - '#E6C384'   # carpYellow (nice warm highlight)
 
   authorColors:
-    # Default author color – soft violet, similar vibe to your Catppuccin purple
+    # Default author color – soft violet, similar vibe to Catppuccin purple
     '*': '#938AA9'  # springViolet1
