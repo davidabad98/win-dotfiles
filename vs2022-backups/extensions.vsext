@@ -1,0 +1,122 @@
+{
+  "id": "eddab9e5-35db-4c8d-81f3-93e20be4f22e",
+  "version": "1.0",
+  "name": "My Visual Studio extensions",
+  "description": "A collection of my Visual Studio extensions",
+  "extensions": [
+    {
+      "vsixId": "Microsoft.VisualStudio.LiveShare.2022",
+      "name": "Live Share 2022",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsls-vs-2022",
+      "downloadUrl": "https://ms-vsliveshare.gallery.vsassets.io:443/_apis/public/gallery/publisher/MS-vsliveshare/extension/vsls-vs-2022/1.0.5949.0/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "VsVim.Microsoft.e97cd707-324b-4e35-a669-eef8dae4b8cf",
+      "name": "VsVim 2022",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=JaredParMSFT.VsVim2022Preview",
+      "downloadUrl": "https://jaredparmsft.gallery.vsassets.io:443/_apis/public/gallery/publisher/JaredParMSFT/extension/VsVim2022Preview/2.10.0.6/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "A274A0E2-E41E-40CC-A694-8D5D14BBD2D0",
+      "name": "ML.NET Model Builder 2022",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=MLNET.ModelBuilder2022",
+      "downloadUrl": "https://mlnet.gallery.vsassets.io:443/_apis/public/gallery/publisher/MLNET/extension/ModelBuilder2022/17.19.2.2511501/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "EditorColorPreview.06059b78-ceae-4188-905d-be8877234e35",
+      "name": "Color Preview",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=MadsKristensen.ColorPreview",
+      "downloadUrl": "https://madskristensen.gallery.vsassets.io:443/_apis/public/gallery/publisher/MadsKristensen/extension/ColorPreview/1.0.33/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "Catppuccin_for_Visual_Studio.cf093970-131b-4883-8405-0577339048c3",
+      "name": "Catppuccin for Visual Studio",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=Catppuccin.CatppuccinVS",
+      "downloadUrl": "https://catppuccin.gallery.vsassets.io:443/_apis/public/gallery/publisher/Catppuccin/extension/CatppuccinVS/1.6.3/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "OneDarkPro.e1e706e2-05d3-4da9-8754-652cd8ab65f4",
+      "name": "One Dark Pro",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=adrianwilczynski.one-dark-pro",
+      "downloadUrl": "https://adrianwilczynski.gallery.vsassets.io:443/_apis/public/gallery/publisher/adrianwilczynski/extension/one-dark-pro/3.2/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "IndentRainbow.f05146ed-8025-4668-b7b1-8a74bd22b241",
+      "name": "IndentRainbow",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=chingucoding.IndentRainbow",
+      "downloadUrl": "https://chingucoding.gallery.vsassets.io:443/_apis/public/gallery/publisher/chingucoding/extension/IndentRainbow/1.4.0/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "d48e8f25-661b-4970-8b66-03f051ba5fc3",
+      "name": "Add New File (64-bit)",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=MadsKristensen.AddNewFile64",
+      "downloadUrl": "https://madskristensen.gallery.vsassets.io:443/_apis/public/gallery/publisher/MadsKristensen/extension/AddNewFile64/4.1.8/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "PaleNight_VSTheme.e1e706e2-05d3-4da9-8754-652cd8ab65f4",
+      "name": "PaleNight VS Theme",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=RJCodeAdvance.PaleNightVS",
+      "downloadUrl": "https://rjcodeadvance.gallery.vsassets.io:443/_apis/public/gallery/publisher/RJCodeAdvance/extension/PaleNightVS/1.2.1/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "3a7b4930-a5fb-46ec-a9b8-9610c8f953b8",
+      "name": "File Icons",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=MadsKristensen.FileIcons",
+      "downloadUrl": "https://madskristensen.gallery.vsassets.io:443/_apis/public/gallery/publisher/MadsKristensen/extension/FileIcons/2.8.244/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "VisualStudioThemePack.453e3fa1-2e0e-467e-abbd-1d08fe6468d1",
+      "name": "Visual Studio Theme Pack",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=idex.vsthemepack",
+      "downloadUrl": "https://idex.gallery.vsassets.io:443/_apis/public/gallery/publisher/idex/extension/vsthemepack/1.2/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "43b35fe0-1f30-48de-887a-68256474202a",
+      "name": "ResXManager",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=TomEnglert.ResXManager",
+      "downloadUrl": "https://tomenglert.gallery.vsassets.io:443/_apis/public/gallery/publisher/TomEnglert/extension/ResXManager/1.103.6686.0/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "5783ce1f-b23d-4e84-87a4-6b2cbe9e0602",
+      "name": "Bundler \u0026 Minifier 2022\u002B",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=Failwyn.BundlerMinifier64",
+      "downloadUrl": "https://failwyn.gallery.vsassets.io:443/_apis/public/gallery/publisher/Failwyn/extension/BundlerMinifier64/2.9.11/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "ClaudiaIDE..7442ac19-889b-4699-a817-e6e054877ee3",
+      "name": "ClaudiaIDE",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=kbuchi.ClaudiaIDE",
+      "downloadUrl": "https://kbuchi.gallery.vsassets.io:443/_apis/public/gallery/publisher/kbuchi/extension/ClaudiaIDE/3.1.48/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "VSOutputEnhancer.Nikolay Balakin.a06be4c3-f97e-425c-8a0d-bdef08ac2abb",
+      "name": "Output enhancer",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=NikolayBalakin.Outputenhancer",
+      "downloadUrl": "https://nikolaybalakin.gallery.vsassets.io:443/_apis/public/gallery/publisher/NikolayBalakin/extension/Outputenhancer/1.8/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "SvgViewer.7a08d0d4-985c-4415-93d5-ddd9135d8f4f",
+      "name": "SVG Viewer",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=MadsKristensen.SvgViewer",
+      "downloadUrl": "https://madskristensen.gallery.vsassets.io:443/_apis/public/gallery/publisher/MadsKristensen/extension/SvgViewer/1.1.10/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "SonarLint.0DE19254-1DCA-4479-8EAF-58E5D677FF4D",
+      "name": "SonarQube for Visual Studio",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=SonarSource.SonarLintforVisualStudio2022",
+      "downloadUrl": "https://sonarsource.gallery.vsassets.io:443/_apis/public/gallery/publisher/SonarSource/extension/SonarLintforVisualStudio2022/9.7.0.16245/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "EditorBar.d5a61a21-bc87-477e-b916-ead20fb3fafb",
+      "name": "Editor Bar",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=jiripolasek.EditorBar",
+      "downloadUrl": "https://jiripolasek.gallery.vsassets.io:443/_apis/public/gallery/publisher/jiripolasek/extension/EditorBar/3.0.1024/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    },
+    {
+      "vsixId": "9a7ebb7f-b08c-4e35-9898-a7b73468a624",
+      "name": "Visual Commander",
+      "moreInfoUrl": "https://marketplace.visualstudio.com/items?itemName=SergeyVlasov.VisualCommander",
+      "downloadUrl": "https://sergeyvlasov.gallery.vsassets.io:443/_apis/public/gallery/publisher/SergeyVlasov/extension/VisualCommander/3.6.0/assetbyname/Microsoft.VisualStudio.Ide.Payload?redirect=true\u0026update=true"
+    }
+  ]
+}
