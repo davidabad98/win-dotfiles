@@ -67,23 +67,23 @@ vim.keymap.set("n", "<leader>s", "<cmd>split<CR>", {
 vim.keymap.set("n", "<leader>n", "<cmd>vnew<CR>", {
 	desc = "New vertical empty buffer",
 })
-vim.keymap.set("n", "<leader>t", "<cmd>tabnew<CR>", {
-	desc = "New tab",
-})
+-- vim.keymap.set("n", "<leader>t", "<cmd>tabnew<CR>", {
+-- 	desc = "New tab",
+-- })
 
 -- Window navigation with leader
-vim.keymap.set("n", "<leader>h", "<C-w>h", {
-	desc = "Focus left window",
-})
-vim.keymap.set("n", "<leader>j", "<C-w>j", {
-	desc = "Focus lower window",
-})
-vim.keymap.set("n", "<leader>k", "<C-w>k", {
-	desc = "Focus upper window",
-})
-vim.keymap.set("n", "<leader>l", "<C-w>l", {
-	desc = "Focus right window",
-})
+-- vim.keymap.set("n", "<leader>h", "<C-w>h", {
+-- 	desc = "Focus left window",
+-- })
+-- vim.keymap.set("n", "<leader>j", "<C-w>j", {
+-- 	desc = "Focus lower window",
+-- })
+-- vim.keymap.set("n", "<leader>k", "<C-w>k", {
+-- 	desc = "Focus upper window",
+-- })
+-- vim.keymap.set("n", "<leader>l", "<C-w>l", {
+-- 	desc = "Focus right window",
+-- })
 
 -- ========== Quickfix ==========
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz", { desc = "Quickfix Next (centered)" })
@@ -113,6 +113,9 @@ vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz", { desc = "Quickfix Prev (center
 
 -- ========== Developer Essentials ==========
 
+-- Yank entire file to clipboard (no feedback)
+vim.keymap.set("n", "<leader>ya", ":%y+<CR>", { desc = "Yank whole file" })
+
 -- keep half-page moves centered
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true, silent = true })
@@ -137,24 +140,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("i", "<C-h>", "<C-w>") -- CTRL+backspace
-
--- Open the tmux sessionizer from inside Neovim
--- NOTE: requires tmux; inside tmux it opens a popup, outside it spawns a new tmux session/window
-local sessionizer = vim.fn.expand("~/.local/bin/tmux-sessionizer")
-
-vim.keymap.set("n", "<C-f>", function()
-	if vim.fn.filereadable(sessionizer) == 0 then
-		vim.notify("tmux-sessionizer not found at " .. sessionizer, vim.log.levels.ERROR)
-		return
-	end
-	if not vim.env.TMUX then
-		-- Not in tmux
-		vim.notify("tmux not started")
-		return
-	end
-	-- Run it inside a new tmux window if we're already in tmux
-	vim.fn.jobstart({ "tmux", "display-popup", "-E", sessionizer }, { detach = true })
-end, { noremap = true, silent = true, desc = "Project switcher (tmux sessionizer)" })
 
 vim.keymap.set(
 	"n",
