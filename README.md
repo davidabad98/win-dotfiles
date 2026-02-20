@@ -23,6 +23,7 @@ This repository manages configurations for:
 | **Neovim** | `nvim/` | `$env:LOCALAPPDATA\nvim` | Complete Neovim setup with LSP, plugins, and keybindings |
 | **VsVim** | `vsvim/.vimrc` | `$HOME\.vimrc` | Vim keybindings for Visual Studio 2022 |
 | **LazyGit** | `lazygit/config.yml` | `$env:LOCALAPPDATA\lazygit\config.yml` | LazyGit UI theme and settings |
+| **GlazeWM** | `glazewm/config.yaml` | `$HOME\.glzr\glazewm\config.yaml` | GlazeWM tiling window manager configuration |
 
 ## Requirements
 
@@ -102,6 +103,9 @@ win-dotfiles/
 │
 ├── lazygit/                   # LazyGit
 │   └── config.yml            # LazyGit theme and settings
+│
+├── glazewm/                   # GlazeWM window manager
+│   └── config.yaml           # GlazeWM configuration
 │
 ├── bootstrap-windows.ps1      # Installation script
 └── README.md                  # This file
@@ -242,6 +246,9 @@ Remove-Item "$HOME\.vimrc"
 
 # Remove LazyGit symlink
 Remove-Item "$env:LOCALAPPDATA\lazygit\config.yml"
+
+# Remove GlazeWM symlink
+Remove-Item "$HOME\.glzr\glazewm\config.yaml"
 ```
 
 ### Option 2: Restore Backups

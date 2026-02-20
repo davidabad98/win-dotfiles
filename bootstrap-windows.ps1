@@ -3,6 +3,7 @@ param(
     [switch]$Nvim,
     [switch]$VsVim,
     [switch]$LazyGit,
+    [switch]$GlazeWM,
     [switch]$Help
 )
 
@@ -13,7 +14,7 @@ Windows Dotfiles Bootstrap Script
 ==================================
 
 USAGE:
-    .\bootstrap-windows.ps1 [-Nvim] [-VsVim] [-LazyGit] [-Help]
+    .\bootstrap-windows.ps1 [-Nvim] [-VsVim] [-LazyGit] [-GlazeWM] [-Help]
 
 PARAMETERS:
     -Nvim       Create symlink for Neovim configuration
@@ -24,6 +25,9 @@ PARAMETERS:
 
     -LazyGit    Create symlink for LazyGit configuration
                 Links: `$env:LOCALAPPDATA\lazygit\config.yml -> win-dotfiles\lazygit\config.yml
+
+    -GlazeWM    Create symlink for GlazeWM window manager configuration
+                Links: `$HOME\.glzr\glazewm\config.yaml -> win-dotfiles\glazewm\config.yaml
 
     -Help       Display this help message
 
@@ -144,6 +148,40 @@ function Install-LazyGit {
     Write-Host "  Done!" -ForegroundColor Green
 }
 
+function Install-GlazeWM {
+    Write-Host "`n[GlazeWM]" -ForegroundColor Cyan
+    
+    $glazewmDotfiles = Join-Path $DotfilesRoot "glazewm\config.yaml"
+    $glazewmDir      = "$HOME\.glzr\glazewm"
+    $glazewmConfig   = Join-Path $glazewmDir "config.yaml"
+    
+    if (-not (Test-Path $glazewmDotfiles)) {
+        Write-Host "  GlazeWM dotfile not found at: $glazewmDotfiles" -ForegroundColor Yellow
+        Write-Host "  Skipping..." -ForegroundColor Yellow
+        return
+    }
+    
+    if (Test-SymlinkCorrect -Path $glazewmConfig -Target $glazewmDotfiles) {
+        Write-Host "  Symlink already exists and is correct, skipping..." -ForegroundColor Green
+        return
+    }
+    
+    if (-not (Test-Path $glazewmDir)) {
+        Write-Host "  Creating directory: $glazewmDir" -ForegroundColor Yellow
+        New-Item -ItemType Directory -Path $glazewmDir -Force | Out-Null
+    }
+    
+    if (Test-Path $glazewmConfig) {
+        $backup = "$($glazewmConfig)_backup_$(Get-Date -Format yyyyMMddHHmmss)"
+        Write-Host "  Backing up existing config to: $backup" -ForegroundColor Yellow
+        Rename-Item $glazewmConfig $backup
+    }
+    
+    Write-Host "  Creating symlink: $glazewmConfig -> $glazewmDotfiles" -ForegroundColor Green
+    New-Item -ItemType SymbolicLink -Path $glazewmConfig -Target $glazewmDotfiles | Out-Null
+    Write-Host "  Done!" -ForegroundColor Green
+}
+
 # Main execution
 if ($Help) {
     Show-Help
@@ -155,18 +193,20 @@ Write-Host "==========================" -ForegroundColor Magenta
 Write-Host "Dotfiles root: $DotfilesRoot" -ForegroundColor Gray
 
 # Determine what to install
-$installAll = -not ($Nvim -or $VsVim -or $LazyGit)
+$installAll = -not ($Nvim -or $VsVim -or $LazyGit -or $GlazeWM)
 
 if ($installAll) {
     Write-Host "`nInstalling all configurations..." -ForegroundColor White
     Install-Neovim
     Install-VsVim
     Install-LazyGit
+    Install-GlazeWM
 } else {
     Write-Host "`nInstalling selected configurations..." -ForegroundColor White
     if ($Nvim) { Install-Neovim }
     if ($VsVim) { Install-VsVim }
     if ($LazyGit) { Install-LazyGit }
+    if ($GlazeWM) { Install-GlazeWM }
 }
 
 Write-Host "`n==========================" -ForegroundColor Magenta
