@@ -60,9 +60,9 @@ nnoremap <leader>l <C-w>l
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
 
-" Center the view when searching
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" Center after next/prev match, without fold-opening
+nnoremap n nzz
+nnoremap N Nzz
 
 " ========== Developer Essentials ==========
 " Keep selection when indenting in visual mode
@@ -96,20 +96,21 @@ nnoremap guu V:vsc Edit.MakeLowercase<CR><Esc>
 nnoremap gUU V:vsc Edit.MakeUppercase<CR><Esc>>
 
 " Find in Files (Ctrl+Shift+F)  -> command: Edit.FindinFiles
+nnoremap <leader>ff :vsc Edit.FindinFiles<CR>
 xnoremap <leader>ff :vsc Edit.FindinFiles<CR>
 
 " Go To: members (GoTo with "m:" workflow)
+nnoremap <leader>fs :vsc Edit.GoToMember<CR>
 xnoremap <leader>fs :vsc Edit.GoToMember<CR>
 
 " Replace (Ctrl+H) -> command: Edit.Replace
-xnoremap <leader>H :vsc Edit.Replace<CR>
+nnoremap <leader>H :vsc Edit.Replace<CR>
 
 " VS navigation (like the IDE back/forward arrows)
 nnoremap <C-o> :vsc View.NavigateBackward<CR>
 
 " Ctrl-i is often seen as <Tab> — map BOTH, so one of them will work
 nnoremap <C-i> :vsc View.NavigateForward<CR>
-nnoremap <Tab> :vsc View.NavigateForward<CR>
 
 " Go to Implementation (Ctrl+F12 behavior)
 nnoremap gi :vsc Edit.GoToImplementation<CR>
