@@ -1,0 +1,298 @@
+{
+  "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "actions": [
+    {
+      "command": {
+        "action": "splitPane"
+      },
+      "id": "User.splitPane.91AB55B1"
+    },
+    {
+      "command": {
+        "action": "swapPane",
+        "direction": "down"
+      },
+      "id": "User.swapPane.F747588A"
+    }
+  ],
+  "copyFormatting": "none",
+  "copyOnSelect": false,
+  "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+  "keybindings": [
+    {
+      "id": "User.splitPane.91AB55B1",
+      "keys": "ctrl+shift+v"
+    },
+    {
+      "id": "Terminal.CopyToClipboard",
+      "keys": "ctrl+c"
+    },
+    {
+      "id": "Terminal.PasteFromClipboard",
+      "keys": "ctrl+v"
+    },
+    {
+      "id": "Terminal.DuplicatePaneAuto",
+      "keys": "alt+shift+d"
+    },
+    {
+      "id": "User.swapPane.F747588A",
+      "keys": "ctrl+shift+s"
+    }
+  ],
+  "newTabMenu": [
+    {
+      "icon": null,
+      "profile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+      "type": "profile"
+    },
+    {
+      "icon": null,
+      "profile": "{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}",
+      "type": "profile"
+    },
+    {
+      "type": "separator"
+    },
+    {
+      "type": "remainingProfiles"
+    }
+  ],
+  "profiles": {
+    "defaults": {
+      "backgroundImage": "C:\\Users\\david\\Pictures\\81zoxd9h9xj91.jpg",
+      "backgroundImageOpacity": 0.08,
+      "colorScheme": "One Half Dark",
+      "font": {
+        "face": "CaskaydiaCove Nerd Font"
+      },
+      "useAcrylic": true
+    },
+    "list": [
+      {
+        "backgroundImageOpacity": 0.03,
+        "colorScheme": "KanagawaDragon (Dev Subtle)",
+        "elevate": false,
+        "font": {
+          "face": "GoMono Nerd Font",
+          "size": 14
+        },
+        "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+        "hidden": false,
+        "name": "PowerShell",
+        "source": "Windows.Terminal.PowershellCore"
+      },
+      {
+        "backgroundImage": "C:\\Users\\david\\Pictures\\wp12450035-japan-4k-desktop-wallpapers.jpg",
+        "backgroundImageOpacity": 0.05,
+        "colorScheme": "Catppuccin Mocha",
+        "elevate": false,
+        "font": {
+          "size": 14
+        },
+        "guid": "{4ff56d04-d9cf-57ea-bae2-ad396374e7e3}",
+        "hidden": false,
+        "name": "Ubuntu 22.04.5 LTS",
+        "source": "CanonicalGroupLimited.Ubuntu22.04LTS_79rhkp1fndgsc"
+      },
+      {
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": true,
+        "name": "Windows PowerShell"
+      },
+      {
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "hidden": false,
+        "name": "Command Prompt"
+      },
+      {
+        "colorScheme": "Ubuntu-22.04-ColorScheme",
+        "font": {
+          "face": "Cascadia Mono"
+        },
+        "guid": "{17bf3de4-5353-5709-bcf9-835bd952a95e}",
+        "hidden": true,
+        "name": "Ubuntu-22.04",
+        "opacity": 70,
+        "source": "Windows.Terminal.Wsl",
+        "startingDirectory": "//wsl$/Ubuntu-22.04/home/"
+      },
+      {
+        "colorScheme": "Ubuntu-ColorScheme",
+        "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
+        "hidden": true,
+        "name": "Ubuntu",
+        "source": "Windows.Terminal.Wsl"
+      },
+      {
+        "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
+        "hidden": false,
+        "name": "Azure Cloud Shell",
+        "source": "Windows.Terminal.Azure"
+      },
+      {
+        "guid": "{5ee36215-e265-5516-b534-d21815609c6f}",
+        "hidden": true,
+        "name": "Developer Command Prompt for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{05b5e373-3c56-540d-892d-88bd0ab84940}",
+        "hidden": true,
+        "name": "Developer PowerShell for VS 2022",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{3d468777-b83f-5c84-9528-d911a9ad9c13}",
+        "hidden": true,
+        "name": "Developer Command Prompt for VS 2019",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{f7336abb-a792-53c4-8f55-0a88f01df3fc}",
+        "hidden": true,
+        "name": "Developer PowerShell for VS 2019",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "colorScheme": "Ubuntu-ColorScheme",
+        "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+        "hidden": true,
+        "name": "Ubuntu",
+        "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+      },
+      {
+        "guid": "{e83a751e-1a86-5328-90a6-f8671977f494}",
+        "hidden": true,
+        "name": "Developer Command Prompt for VS 2022 (2)",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{112bd39e-9fb0-5ee5-ab42-f6ff8008d9cb}",
+        "hidden": true,
+        "name": "Developer PowerShell for VS 2022 (2)",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{5805f8fb-2993-56d5-8974-ee5266cf2ef2}",
+        "hidden": true,
+        "name": "Developer Command Prompt for VS 2022 (3)",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{6ece59b4-ca15-5961-bf39-2968b42baf32}",
+        "hidden": true,
+        "name": "Developer PowerShell for VS 2022 (3)",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{15f386ae-1fe1-58f3-ae14-fc635be725ec}",
+        "hidden": true,
+        "name": "Developer Command Prompt for VS 18",
+        "source": "Windows.Terminal.VisualStudio"
+      },
+      {
+        "guid": "{fc23d02f-535f-52b3-a56d-bf9ad08a88c6}",
+        "hidden": true,
+        "name": "Developer PowerShell for VS 18",
+        "source": "Windows.Terminal.VisualStudio"
+      }
+    ]
+  },
+  "schemes": [
+    {
+      "background": "#1E1E2E",
+      "black": "#45475A",
+      "blue": "#89B4FA",
+      "brightBlack": "#585B70",
+      "brightBlue": "#89B4FA",
+      "brightCyan": "#94E2D5",
+      "brightGreen": "#A6E3A1",
+      "brightPurple": "#F5C2E7",
+      "brightRed": "#F38BA8",
+      "brightWhite": "#A6ADC8",
+      "brightYellow": "#F9E2AF",
+      "cursorColor": "#F5E0DC",
+      "cyan": "#94E2D5",
+      "foreground": "#CDD6F4",
+      "green": "#A6E3A1",
+      "name": "Catppuccin Mocha",
+      "purple": "#F5C2E7",
+      "red": "#F38BA8",
+      "selectionBackground": "#585B70",
+      "white": "#BAC2DE",
+      "yellow": "#F9E2AF"
+    },
+    {
+      "name": "KanagawaDragon (Dev Subtle)",
+      "background": "#181616",
+      "foreground": "#DCD7BA",
+      "black": "#0D0C0C",
+      "red": "#E46876",
+      "green": "#98BB6C",
+      "yellow": "#E6C384",
+      "blue": "#7E9CD8",
+      "purple": "#957FB8",
+      "cyan": "#7AA89F",
+      "white": "#C8C093",
+      "brightBlack": "#625E5A",
+      "brightRed": "#FF5D62",
+      "brightGreen": "#87A987",
+      "brightYellow": "#FF9E3B",
+      "brightBlue": "#7FB4CA",
+      "brightPurple": "#B8B4D0",
+      "brightCyan": "#A3D4D5",
+      "brightWhite": "#C5C9C5",
+      "cursorColor": "#C8C093",
+      "selectionBackground": "#223249"
+    }
+  ],
+  "showTabsFullscreen": false,
+  "showTabsInTitlebar": true,
+  "themes": [
+    {
+      "name": "Catppuccin Mocha",
+      "tab": {
+        "background": "#1E1E2EFF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#181825FF",
+        "unfocusedBackground": "#11111BFF"
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    },
+    {
+      "name": "KanagawaDragon (Dev Subtle)",
+      "tab": {
+        "background": "#181616FF",
+        "iconStyle": "default",
+        "showCloseButton": "always",
+        "unfocusedBackground": "#16161DFF"
+      },
+      "tabRow": {
+        "background": "#181616FF",
+        "unfocusedBackground": "#16161DFF"
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "experimental.rainbowFrame": false,
+        "frame": null,
+        "unfocusedFrame": null,
+        "useMica": false
+      }
+    }
+  ],
+  "useAcrylicInTabRow": true
+}

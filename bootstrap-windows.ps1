@@ -5,6 +5,7 @@ param(
     [switch]$LazyGit,
     [switch]$GlazeWM,
     [switch]$OpenCode,
+    [switch]$WindowsTerminal,
     [switch]$Help
 )
 
@@ -15,7 +16,7 @@ Windows Dotfiles Bootstrap Script
 ==================================
 
 USAGE:
-    .\bootstrap-windows.ps1 [-Nvim] [-VsVim] [-LazyGit] [-GlazeWM] [-OpenCode] [-Help]
+    .\bootstrap-windows.ps1 [-Nvim] [-VsVim] [-LazyGit] [-GlazeWM] [-OpenCode] [-WindowsTerminal] [-Help]
 
 PARAMETERS:
     -Nvim       Create symlink for Neovim configuration
@@ -32,6 +33,11 @@ PARAMETERS:
 
     -OpenCode   Create symlink for OpenCode configuration
                 Links: `$HOME\.config\opencode\opencode.jsonc -> win-dotfiles\opencode\opencode.jsonc
+
+    -WindowsTerminal  Create symlink for Windows Terminal configuration
+                Links: `$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_*\LocalState\settings.json
+                       -> win-dotfiles\terminal\settings.json
+                Note: Package path is resolved dynamically via Get-AppxPackage
 
     -Help       Display this help message
 
@@ -220,6 +226,47 @@ function Install-OpenCode {
     Write-Host "  Done!" -ForegroundColor Green
 }
 
+function Install-WindowsTerminal {
+    Write-Host "`n[Windows Terminal]" -ForegroundColor Cyan
+
+    $wtDotfiles = Join-Path $DotfilesRoot "terminal\settings.json"
+
+    if (-not (Test-Path $wtDotfiles)) {
+        Write-Host "  Windows Terminal dotfile not found at: $wtDotfiles" -ForegroundColor Yellow
+        Write-Host "  Skipping..." -ForegroundColor Yellow
+        return
+    }
+
+    $pkg = Get-AppxPackage -Name "Microsoft.WindowsTerminal" -ErrorAction SilentlyContinue
+    if (-not $pkg) {
+        Write-Host "  Windows Terminal is not installed, skipping..." -ForegroundColor Yellow
+        return
+    }
+
+    $wtDir    = "$env:LOCALAPPDATA\Packages\$($pkg.PackageFamilyName)\LocalState"
+    $wtConfig = Join-Path $wtDir "settings.json"
+
+    if (Test-SymlinkCorrect -Path $wtConfig -Target $wtDotfiles) {
+        Write-Host "  Symlink already exists and is correct, skipping..." -ForegroundColor Green
+        return
+    }
+
+    if (-not (Test-Path $wtDir)) {
+        Write-Host "  Creating directory: $wtDir" -ForegroundColor Yellow
+        New-Item -ItemType Directory -Path $wtDir -Force | Out-Null
+    }
+
+    if (Test-Path $wtConfig) {
+        $backup = "$($wtConfig)_backup_$(Get-Date -Format yyyyMMddHHmmss)"
+        Write-Host "  Backing up existing config to: $backup" -ForegroundColor Yellow
+        Rename-Item $wtConfig $backup
+    }
+
+    Write-Host "  Creating symlink: $wtConfig -> $wtDotfiles" -ForegroundColor Green
+    New-Item -ItemType SymbolicLink -Path $wtConfig -Target $wtDotfiles | Out-Null
+    Write-Host "  Done!" -ForegroundColor Green
+}
+
 # Main execution
 if ($Help) {
     Show-Help
@@ -231,7 +278,7 @@ Write-Host "==========================" -ForegroundColor Magenta
 Write-Host "Dotfiles root: $DotfilesRoot" -ForegroundColor Gray
 
 # Determine what to install
-$installAll = -not ($Nvim -or $VsVim -or $LazyGit -or $GlazeWM -or $OpenCode)
+$installAll = -not ($Nvim -or $VsVim -or $LazyGit -or $GlazeWM -or $OpenCode -or $WindowsTerminal)
 
 if ($installAll) {
     Write-Host "`nInstalling all configurations..." -ForegroundColor White
@@ -240,6 +287,7 @@ if ($installAll) {
     Install-LazyGit
     Install-GlazeWM
     Install-OpenCode
+    Install-WindowsTerminal
 } else {
     Write-Host "`nInstalling selected configurations..." -ForegroundColor White
     if ($Nvim) { Install-Neovim }
@@ -247,6 +295,7 @@ if ($installAll) {
     if ($LazyGit) { Install-LazyGit }
     if ($GlazeWM) { Install-GlazeWM }
     if ($OpenCode) { Install-OpenCode }
+    if ($WindowsTerminal) { Install-WindowsTerminal }
 }
 
 Write-Host "`n==========================" -ForegroundColor Magenta
