@@ -24,6 +24,7 @@ This repository manages configurations for:
 | **VsVim** | `vsvim/.vimrc` | `$HOME\.vimrc` | Vim keybindings for Visual Studio 2022 |
 | **LazyGit** | `lazygit/config.yml` | `$env:LOCALAPPDATA\lazygit\config.yml` | LazyGit UI theme and settings |
 | **GlazeWM** | `glazewm/config.yaml` | `$HOME\.glzr\glazewm\config.yaml` | GlazeWM tiling window manager configuration |
+| **OpenCode** | `opencode/opencode.jsonc` | `$HOME\.config\opencode\opencode.jsonc` | OpenCode AI coding agent configuration |
 
 ## Requirements
 
@@ -106,6 +107,9 @@ win-dotfiles/
 │
 ├── glazewm/                   # GlazeWM window manager
 │   └── config.yaml           # GlazeWM configuration
+│
+├── opencode/                  # OpenCode AI coding agent
+│   └── opencode.jsonc        # OpenCode configuration
 │
 ├── bootstrap-windows.ps1      # Installation script
 └── README.md                  # This file
