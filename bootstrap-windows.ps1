@@ -1,5 +1,5 @@
 param(
-    [string]$DotfilesRoot = "$HOME\win-dotfiles",
+    [string]$DotfilesRoot = $PSScriptRoot,
     [switch]$Nvim,
     [switch]$VsVim,
     [switch]$LazyGit,
