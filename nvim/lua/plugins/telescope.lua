@@ -8,6 +8,31 @@ return {
 		-- Use opts so lazy.nvim merges/handles setup for us
 		opts = {
 			defaults = {
+				-- Never open files inside the neo-tree window
+				get_selection_window = function()
+					local wins = vim.api.nvim_list_wins()
+					for _, win in ipairs(wins) do
+						local buf = vim.api.nvim_win_get_buf(win)
+						local ft = vim.bo[buf].filetype
+						if ft ~= "neo-tree" and ft ~= "TelescopePrompt" then
+							return win
+						end
+					end
+					-- fallback: open a new vertical split
+					vim.cmd("vsplit")
+					return vim.api.nvim_get_current_win()
+				end,
+
+				-- animated busy spinner in the prompt counter
+				get_status_text = function(self, opts)
+					local ok, busy_ts = pcall(require, "busy.telescope")
+					if ok then
+						return busy_ts.get_status_text(self, opts)
+					end
+					-- fallback: return nil so Telescope uses its built-in behaviour
+					return nil
+				end,
+
 				-- horizontal, prompt on top
 				layout_strategy = "horizontal",
 				layout_config = {

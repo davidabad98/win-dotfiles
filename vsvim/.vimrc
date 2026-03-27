@@ -129,3 +129,9 @@ nnoremap K :vsc Edit.QuickInfo<CR>
 
 " Code Actions / Quick Actions and Refactorings (Ctrl+.)
 nnoremap <leader>ca :vsc View.QuickActions<CR>
+
+" ========== Solution Explorer ==========
+" Open Solution Explorer and reveal/select the active file in the tree
+" (equivalent to Neovim's neo-tree Ctrl+E behavior)
+" Note: to close Solution Explorer, press Esc while it is focused.
+nnoremap <C-e> :vsc SolutionExplorer.SyncWithActiveDocument<CR>
