@@ -5,7 +5,7 @@ set relativenumber
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set smartindent
+" set smartindent  " not supported by VsVim
 
 set nowrap
 set cursorline
@@ -24,8 +24,8 @@ set incsearch
 set clipboard=unnamed
 
 " ========== UI ==========
-set splitbelow
-set splitright
+" set splitbelow  " not supported by VsVim
+" set splitright  " not supported by VsVim
 " termguicolors and colorcolumn are UI/terminal features; not used by VsVim.
 " Add a column/ruler at 88 in VS itself (see notes below).
 
