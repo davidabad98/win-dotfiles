@@ -1,3 +1,6 @@
+os:
+  editor: nvim
+  editPreset: nvim
 
 gui:
   # Use the Kanagawa Dragon theme
