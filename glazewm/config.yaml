@@ -154,6 +154,9 @@ window_rules:
   # --- Always float Remote Desktop Connection (mstsc) ---
       - window_process: { equals: "mstsc" }
 
+  # --- Always float LogMeIn client (LMIIgnition) ---
+      - window_process: { equals: "LMIIgnition" }
+
   # (Optional) also float classic dialogs if you see any tiled
   - commands: ["set-floating"]
     match:
